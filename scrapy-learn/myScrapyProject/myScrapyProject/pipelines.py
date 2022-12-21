@@ -15,4 +15,5 @@ class MyscrapyprojectPipeline:
     def process_item(self, item, spider):
         # yield的数据会在这儿进行处理
         print(item)
+        # pass
         # return item

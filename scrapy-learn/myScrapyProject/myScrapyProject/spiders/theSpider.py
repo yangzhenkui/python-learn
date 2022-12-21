@@ -85,6 +85,7 @@ class ThespiderSpider(scrapy.Spider):
     total = []
     def parse(self, response):
         main_li_list = response.xpath("/html/body/div[6]/ul[2]/li")
+        print("第{}次调用".format(self.page_number))
         for li in main_li_list:
             name = li.xpath("./a/@title").extract_first()
             address = li.xpath("./div/a[1]/text()").extract()[-1].strip()
@@ -93,7 +94,6 @@ class ThespiderSpider(scrapy.Spider):
             item["name"] = name
             item['address'] = address
             item['link'] = link
-            self.total.append(link)
             yield scrapy.Request(url=link, callback=self.detail_page_parse, meta={"item": item})
 
     def detail_page_parse(self, response):
@@ -104,8 +104,8 @@ class ThespiderSpider(scrapy.Spider):
         if self.page_number <= 3:
             self.page_number += 1
             new_link = self.base_url % self.page_number
-            print("正在处理的页面为："+new_link)
-            scrapy.Request(url=new_link, callback=self.parse)
+            # yield相当于return，但是与return不同的是，yield不会结束程序
+            yield scrapy.Request(url=new_link, callback=self.parse)
 
 
 

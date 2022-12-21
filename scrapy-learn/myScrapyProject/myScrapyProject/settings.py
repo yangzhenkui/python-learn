@@ -21,7 +21,7 @@ ROBOTSTXT_OBEY = False
 # 修改打印日志level，只输出错误信息即可
 LOG_LEVEL = "ERROR"
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+# CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
